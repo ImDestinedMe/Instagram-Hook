@@ -8,42 +8,44 @@
 
 #import "ViewController.h"
 
-#define KAUTHURL @"https://api.instagram.com/oauth/authorize/?client_id="
 #define kAPIURl @"https://api.instagram.com/v1/users/self/followed-by?access_token="
-#define KCLIENTID @"USE_YOUR_CLIENT_ID"
-#define KCLIENTSERCRET @"USE_YOUR_CLIENT_SECRET"
-#define kREDIRECTURI @"USE_YOUR_REDIRECT_URI"
 
-@interface ViewController () <UIWebViewDelegate>
+@interface ViewController ()
 
-@property (nonatomic, retain) NSString *access_token;
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) NSArray *followers;
 
 @end
 
 @implementation ViewController
 
+#pragma mark - View Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    //Use the below code to display the login hook for Instagram
-    NSString *fullURL = [NSString stringWithFormat:@"%@%@&redirect_uri=%@&response_type=token", KAUTHURL, KCLIENTID, kREDIRECTURI];
-    NSURL *url = [NSURL URLWithString:fullURL];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
-    [self.webView loadRequest:requestObj];
 }
 
-#pragma mark - Private
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!self.access_token) {
+        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"instagram"];
+        
+        [self presentViewController:vc animated:NO completion:nil];
+    }
+}
 
-- (void)getFollowers
-{
+#pragma mark - Instagram
+
+- (void)getFollowers {
     NSString *url = [NSString stringWithFormat:@"%@%@", kAPIURl, self.access_token];
-    NSDictionary *data = [self dataWithURL:[NSURL URLWithString:url]][@"data"];
+    NSArray *data = [self dataWithURL:[NSURL URLWithString:url]][@"data"];
     
     //Prints your followers to the log
-    NSLog(@"%@", data);
+    self.followers = data;
+    [self.tableView reloadData];
 }
 
 - (NSDictionary *)dataWithURL:(NSURL *)url
@@ -60,28 +62,32 @@
     return dict;
 }
 
-#pragma mark - UIWebView Delegate
+#pragma mark - Properties
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (void)setAccess_token:(NSString *)access_token
 {
-    NSString *urlStr = [request.URL absoluteString];
-    NSArray *urlParts = [urlStr componentsSeparatedByString:[NSString stringWithFormat:@"%@/", kREDIRECTURI]];
-    if (urlParts.count > 1) {
-        urlStr = urlParts[1];
-        NSRange token = [urlStr rangeOfString:@"#access_token="];
-        if (token.location != NSNotFound)
-        {
-            //Store the access_token for later
-            self.access_token = [urlStr substringFromIndex:NSMaxRange(token)];
-            
-            //Get the followers
-            [self getFollowers];
-        }
+    if (_access_token != access_token) {
+        _access_token = access_token;
         
-        return NO;
+        [self getFollowers];
     }
+}
+
+#pragma mark - UITableView Delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.followers.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"usercell"];
     
-    return YES;
+    NSDictionary *user = self.followers[indexPath.row];
+    cell.textLabel.text = user[@"username"];
+    
+    return cell;
 }
 
 @end

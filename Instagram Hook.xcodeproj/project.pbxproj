@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE9809671B38D76000145608 /* InstagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9809661B38D76000145608 /* InstagramViewController.m */; };
 		DEB6000E1B38CE21005CD150 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB6000D1B38CE21005CD150 /* main.m */; };
 		DEB600111B38CE21005CD150 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB600101B38CE21005CD150 /* AppDelegate.m */; };
 		DEB600141B38CE21005CD150 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB600131B38CE21005CD150 /* ViewController.m */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE9809651B38D76000145608 /* InstagramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramViewController.h; sourceTree = "<group>"; };
+		DE9809661B38D76000145608 /* InstagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramViewController.m; sourceTree = "<group>"; };
 		DEB600081B38CE21005CD150 /* Instagram Hook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram Hook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEB6000C1B38CE21005CD150 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEB6000D1B38CE21005CD150 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE9809641B38D73500145608 /* Instagram */ = {
+			isa = PBXGroup;
+			children = (
+				DE9809651B38D76000145608 /* InstagramViewController.h */,
+				DE9809661B38D76000145608 /* InstagramViewController.m */,
+			);
+			name = Instagram;
+			sourceTree = "<group>";
+		};
 		DEB600091B38CE21005CD150 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +84,7 @@
 		DEB6000A1B38CE21005CD150 /* Instagram Hook */ = {
 			isa = PBXGroup;
 			children = (
+				DE9809641B38D73500145608 /* Instagram */,
 				DEB6000F1B38CE21005CD150 /* AppDelegate.h */,
 				DEB600101B38CE21005CD150 /* AppDelegate.m */,
 				DEB600121B38CE21005CD150 /* ViewController.h */,
@@ -220,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEB600141B38CE21005CD150 /* ViewController.m in Sources */,
+				DE9809671B38D76000145608 /* InstagramViewController.m in Sources */,
 				DEB600111B38CE21005CD150 /* AppDelegate.m in Sources */,
 				DEB6000E1B38CE21005CD150 /* main.m in Sources */,
 			);
@@ -416,6 +430,7 @@
 				DEB6002D1B38CE21005CD150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEB6002E1B38CE21005CD150 /* Build configuration list for PBXNativeTarget "Instagram HookTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +439,7 @@
 				DEB600301B38CE21005CD150 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

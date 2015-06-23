@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  InstagramViewController.h
 //  Instagram Hook
 //
 //  Created by Destiny Bonavita on 6/22/15.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UITableViewController
-
-@property (nonatomic, retain) NSString *access_token;
+@interface InstagramViewController : UIViewController
 
 @end
-
